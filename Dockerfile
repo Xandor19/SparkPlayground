@@ -4,16 +4,17 @@ RUN microdnf install -y git unzip procps
     
 ENV MASTER=The-Prestigeous. \
     SPARK_VER=3.5.1
-ENV SPARK_HOME=/usr/spark-$SPARK_VER-bin-hadoop3-scala2.13     
+ENV SPARK_HOME=/usr/spark-$SPARK_VER     
 
 WORKDIR /usr
-COPY software/spark-$SPARK_VER-bin-hadoop3-scala2.13.tgz .
-RUN tar -xzf spark-$SPARK_VER-bin-hadoop3-scala2.13.tgz \
-    rm ./spark-$SPARK_VER-bin-hadoop3-scala2.13.tgz \
+COPY software/spark-$SPARK_VER.tgz .
+RUN tar -xzf spark-$SPARK_VER.tgz \
+    rm ./spark-$SPARK_VER.tgz \
     rm -rf $SPARK_HOME/examples
 
+#ARG downloadurl
 #RUN curl -sL \
-#    https://dlcdn.apache.org/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop3-scala2.13.tgz |\
+#    $downloadurl |\
 #    gunzip |\
 #    tar -x -C /usr/ &&\
 #    rm -rf $SPARK_HOME/examples
