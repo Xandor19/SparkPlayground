@@ -51,6 +51,11 @@ trait Exercise {
     col(n).as(r.replaceAllIn(n.toLowerCase(), _.group(1).toUpperCase()))
   }
 
+  def dataframePreview(df: DataFrame): Unit = {
+    df.printSchema()
+    df.show()
+  }
+
   def saveToDb(
     df: DataFrame, 
     table: String, 
