@@ -9,7 +9,8 @@ libraryDependencies ++= Seq(
     "org.apache.spark" %% "spark-sql" % sparkVersion,
     "org.scalactic" %% "scalactic" % scalatestVersion,
     "org.scalatest" %% "scalatest" % scalatestVersion % "test",
-    "org.postgresql" % "postgresql" % "42.7.3"
+    "org.postgresql" % "postgresql" % "42.7.3",
+    "com.databricks" %% "spark-xml" % "0.17.0"
 )
 
 javaOptions ++= Seq(
