@@ -11,7 +11,7 @@ import java.util.Properties
 import org.apache.spark.sql.SaveMode
 
 trait Exercise {
-  val conStr = "jdbc:postgresql://localhost/spark_playground"
+  val conStr = "jdbc:postgresql://localhost/"
   val deff = new Properties()
   deff.setProperty("driver", "org.postgresql.Driver")
   deff.setProperty("user", "postgres")
@@ -56,8 +56,23 @@ trait Exercise {
     df.show()
   }
 
+  def readFromDb(
+    spark: SparkSession,
+    database: String,
+    query: String,
+    props: Properties = null
+  ): DataFrame = {
+    val current = deff.clone().asInstanceOf[Properties]
+
+    if (props != null) current.putAll(props)
+
+    spark.read
+      .jdbc(conStr + database, query, current)
+  }
+
   def saveToDb(
     df: DataFrame, 
+    database: String,
     table: String, 
     props: Properties = null
   ): Unit = {
@@ -67,6 +82,6 @@ trait Exercise {
 
     df.write
       .mode(SaveMode.Overwrite)
-      .jdbc(conStr, table, current)
+      .jdbc(conStr + database, table, current)
   }
 }

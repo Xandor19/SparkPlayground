@@ -48,7 +48,7 @@ object StockMarket extends Exercise {
       $"diff_max"
     ).show() */
 
-    saveToDb(monthsCloseDiff(df), "month_close_diff")
+    saveToDb(monthsCloseDiff(df), "spark_playgound", "month_close_diff")
     // yearlyAvg.rdd.map(_.mkString(",")).saveAsTextFile("results/yearly_data")
 
     //saveToDb(df, "month_close_diff")
